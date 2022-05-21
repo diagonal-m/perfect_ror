@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  book_admin:
+    build:
+      context: ./book_admin/
+      dockerfile: Dockerfile
+    ports:
+      - "3333:3333"
+    volumes:
+      - ./book_admin:/var/www/book_admin
+      - gem_data:/usr/local/bundle
+    command: /bin/sh -c "rm -f /var/www/book_admin/tmp/pids/server.pid && bundle exec rails s -p 3333 -b '0.0.0.0'"
+volumes:
+  gem_data:
